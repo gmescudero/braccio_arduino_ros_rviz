@@ -15,7 +15,7 @@
  */
 uint _DataArray[6];
 
-void chatterCallback(const sensor_msgs::JointState::ConstPtr& msg)
+void jointStCallback(const sensor_msgs::JointState::ConstPtr& msg)
 {
   int i=0;
   for(i=0; i<6; i++)
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
    * on a given topic.  This invokes a call to the ROS
    * master node, which keeps a registry of who is publishing and who
    * is subscribing.  Messages are passed to a callback function, here
-   * called chatterCallback.  subscribe() returns a Subscriber object that you
+   * called jointStCallback.  subscribe() returns a Subscriber object that you
    * must hold on to until you want to unsubscribe.  When all copies of the Subscriber
    * object go out of scope, this callback will automatically be unsubscribed from
    * this topic.
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
    * is the number of messages that will be buffered up before beginning to throw
    * away the oldest ones.
    */
-  ros::Subscriber sub = n.subscribe("joint_states", 6, chatterCallback);
+  ros::Subscriber sub = n.subscribe("joint_states", 6, jointStCallback);
 
   ros::Publisher pub = n.advertise<std_msgs::UInt8MultiArray>("joint_array", 6);
   
